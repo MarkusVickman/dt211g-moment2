@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Startsida</title>
+    <title>ECMA-Script</title>
     <link rel="stylesheet" href="css/style.css">
     <!--Länk till javascript mobilmeny-->
-    <script type="module" src="js/mobile_menu.js"></script>
+    <script type="module" src="js/table.js"></script>
 </head>
 
 <body>
@@ -18,18 +18,22 @@
         </a>
     </header>
     <main class="text">
+        <div class="follow">
         <h1>Webbutveckling - Ramschema</h1>
         <h2>Sök:</h2>
-        <input type="search" placeholder="Sök efter kurskod eller kursnamn">
+        <input type="search" placeholder="Sök efter kurskod eller kursnamn" id="search">
         <table>
             <thead>
-                <tr><th>Kurkod</th>
-                    <th>Namn</th>
-                    <th>Progression</th>
+                <tr>
+                    <th id="code">Kurskod</th>
+                    <th id="name">Namn</th>
+                    <th id="progression">Progression</th>
                 </tr>
-                </thead>
+            </thead>
+            <tbody id="table">
+            </tbody>
         </table>
-
+    </div>
     </main>
 </body>
 
