@@ -36,3 +36,8 @@ input, table{
     border-width: 2px;
 }
 
+#code:hover, #name:hover, #progression:hover{
+    background-color: whitesmoke;
+    text-decoration: underline;
+}
+
