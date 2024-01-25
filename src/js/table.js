@@ -2,20 +2,9 @@
 Datan går att sortera efter kurskod, namn och progression. Det går även att söka igenom datan.*/
 
 "use strict"
-/*
-//Knappar för att ändra ordning/sortera i tabellen
-let codeButton = document.getElementById("code");
-let nameButton = document.getElementById("name");
-let progressionButton = document.getElementById("progression");
-*/
-//Där datan ska skrivar ut på skärmen
-
-/*
-//Sökruta för att söka i tabellen
-let searchBox = document.getElementById("search");
-*/
 
 let mainListener = document.getElementById("listener");
+let seachField = document.getElementById("search");
 
 // En asynkron funktion som simulerar hämtning av data från en API
 async function fetchData() {
@@ -23,39 +12,62 @@ async function fetchData() {
         const response = await fetch('https://dahlgren.miun.se/ramschema_ht23.php');
         let data = await response.json();
         buildTable(data);
-        byCoursename = data.sort((a, b) => (a.coursename > b.coursename) ? 1 : -1);
-        byProgression = data.sort((a, b) => (a.progression - b.progression) ? 1 : -1);
-        byCode = data.sort((a, b) => (a.code - b.code) ? 1 : -1);
-        return data;
-
+        referenceData = data;
     } catch (error) {
         console.error('Fetch error:', error);
         throw error;
     }
 }
 
-const courseTable = fetchData();
+fetchData();
 
+let referenceData;
 
+let i = 1;
+let j = 1;
+let k = 1;
 
-let byCoursename;
-let byProgression;
-let byCode;
+seachField.addEventListener("input", function (e){
+    let filteredData = referenceData.filter((code) => {
+        return code.code.toLowerCase().includes(e.target.value.toLowerCase()) || code.coursename.toLowerCase().includes(e.target.value.toLowerCase());
+    });
+    buildTable(filteredData);
 
+})
 
 mainListener.addEventListener("click", function (e) {
-    if (e.target.id === "code"){
-        buildTable(byCode);
-        console.table(courseTable);
-    }
-    else if (e.target.id === "name"){
-        buildTable(byCoursename);
-        console.table(byCoursename);
+
+    if (e.target.id === "code") {
+        i++; let im = i % 2;
+        if (im === 0) {
+            referenceData.sort((a, b) => a.code > b.code);
+        }
+        else {
+            referenceData.sort((a, b) => a.code < b.code);
+        }
+        buildTable(referenceData);
     }
 
-    else if (e.target.id === "progression"){
-        buildTable(byProgression);
-        console.table(byProgression);
+    if (e.target.id === "name") {
+        j++; let jm = j % 2;
+        if (jm === 0) {
+            referenceData.sort((a, b) => (a.coursename > b.coursename) ? 1 : -1);
+        }
+        else {
+            referenceData.sort((a, b) => (a.coursename > b.coursename) ? 1 : +1);
+        }
+        buildTable(referenceData);
+    }
+
+    else if (e.target.id === "progression") {
+        k++; let km = k % 2;
+        if (km === 0) {
+            referenceData.sort((a, b) => a.progression > b.progression);
+        }
+        else {
+            referenceData.sort((a, b) => a.progression < b.progression);
+        }
+        buildTable(referenceData);
     }
 })
 
@@ -71,6 +83,10 @@ function buildTable(data) {
         let text2 = document.createTextNode(data[i].coursename);
         let text3 = document.createTextNode(data[i].progression);
 
+        tableRow.classList.add("rowSearch");
+        tableCell1.classList.add("cellSearch");
+        tableCell2.classList.add("cellSearch");
+        
         tableCell1.appendChild(text1);
         tableCell2.appendChild(text2);
         tableCell3.appendChild(text3);
@@ -80,34 +96,3 @@ function buildTable(data) {
         tableBody.appendChild(tableRow);
     }
 }
-
-/*
-function sortCode(){
-    let byCode = courseTable.sort((a, b) => a.code - b.code);
-    buildTable(byCode);
-    console.table(byCode);
-}
-*/
-/*
-function sortByCoursename(data) {
-    data.sort((a, b) => a.coursename - b.coursename);
-    console.table(data);
-    buildTable(data);
-}
-*/
-
-
-// Användning av den asynkrona funktionen
-/*
-async function processData() {
-    try {
-        const result = await fetchData(); // Väntar på att data ska hämtas
-        buildTable(result);
-        return (result);
-        
-
-        // ... gör något med den mottagna datan
-    } catch (error) {
-        // Hantera fel om det uppstår vid hämtning eller bearbetning av data
-    }
-}*/
