@@ -50,29 +50,29 @@ mainListener.addEventListener("click", function (e) {
             referenceData.sort((a, b) => (a.code > b.code) ? 1 : -1);
         }
         else {
-            referenceData.sort((a, b) => (a.code < b.code) ? 1 : +1);
+            referenceData.sort((a, b) => (a.code < b.code) ? 1 : -1).reversed;
         }
         buildTable(referenceData);
     }
 
-    else if (e.target.id === "name") {
+    if (e.target.id === "name") {
         j++; let jm = j % 2;
         if (jm === 0) {
             referenceData.sort((a, b) => (a.coursename > b.coursename) ? 1 : -1);
         }
         else {
-            referenceData.sort((a, b) => (a.coursename > b.coursename) ? 1 : +1);
+            referenceData.sort((a, b) => (a.coursename < b.coursename) ? 1 : -1).reversed;
         }
         buildTable(referenceData);
     }
 
-    else if (e.target.id === "progression") {
+    if (e.target.id === "progression") {
         k++; let km = k % 2;
         if (km === 0) {
             referenceData.sort((a, b) => (a.progression > b.progression) ? 1 : -1);
         }
         else {
-            referenceData.sort((a, b) => (a.progression < b.progression) ? 1 : +1);
+            referenceData.sort((a, b) => (a.progression < b.progression) ? 1 : -1).reversed;
         }
         buildTable(referenceData);
     }
