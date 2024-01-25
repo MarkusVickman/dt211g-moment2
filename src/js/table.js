@@ -47,15 +47,15 @@ mainListener.addEventListener("click", function (e) {
     if (e.target.id === "code") {
         i++; let im = i % 2;
         if (im === 0) {
-            referenceData.sort((a, b) => a.code > b.code);
+            referenceData.sort((a, b) => (a.code > b.code) ? 1 : -1);
         }
         else {
-            referenceData.sort((a, b) => a.code < b.code);
+            referenceData.sort((a, b) => (a.code < b.code) ? 1 : +1);
         }
         buildTable(referenceData);
     }
 
-    if (e.target.id === "name") {
+    else if (e.target.id === "name") {
         j++; let jm = j % 2;
         if (jm === 0) {
             referenceData.sort((a, b) => (a.coursename > b.coursename) ? 1 : -1);
@@ -69,10 +69,10 @@ mainListener.addEventListener("click", function (e) {
     else if (e.target.id === "progression") {
         k++; let km = k % 2;
         if (km === 0) {
-            referenceData.sort((a, b) => a.progression > b.progression);
+            referenceData.sort((a, b) => (a.progression > b.progression) ? 1 : -1);
         }
         else {
-            referenceData.sort((a, b) => a.progression < b.progression);
+            referenceData.sort((a, b) => (a.progression < b.progression) ? 1 : +1);
         }
         buildTable(referenceData);
     }
